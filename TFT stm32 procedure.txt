@@ -1,0 +1,113 @@
+LI9341 Display with Blue Pill using STM32CubeIDE
+Prerequisites
+This project assumes you have already installed STM32CubeIDE.
+You need to have previously done a basic blink sketch with blue-pill using STM32CubeIDE. 
+I have made a complete video from installing STM32CubeIDE to LED blink program.
+ You can watch it by clicking this link. 
+
+STM32CubeIDE Settings
+Click RCC → High Speed Clock (HSE) to Crystal/Ceramic Resonator
+
+Click Clock Configuration tab → HCLK (MHz) to 72
+
+Click Pinout and Configuration tab
+
+Click connectivity → Click SPI1
+
+For Mode select Transmit Only Master
+
+Configuration → Parameter Settings
+
+Change prescalar (for Baud rate) to 4
+
+Configuration → DMA Settings
+
+Click Add Button → Select SPI1_TX
+
+Set PB0, PB1 AND PB10 to GPIO_Output
+
+Libraries
+Taken from https://github.com/eziya/STM32_HAL_ILI9341
+
+Inside Core/Inc Folder
+
+Inside Core/Inc Folder
+
+fonts.h
+ILI9341_GFX.h
+ILI9341_STM32_Driver.h
+Inside Core/Src Folder
+
+fonts.c
+ILI9341_GFX.c
+ILI9341_STM32_Driver.c
+
+Additional code on top of STM32CubeIDE generated code (main.c)
+/* USER CODE BEGIN Includes */
+#include "ILI9341_STM32_Driver.h"
+#include "ILI9341_GFX.h"
+/* USER CODE END Includes */
+
+  /* USER CODE BEGIN 2 */
+  ILI9341_Init();
+
+  // Simple Text writing (Text, Font, X, Y, Color, BackColor)
+  // Available Fonts are FONT1, FONT2, FONT3 and FONT4
+  ILI9341_FillScreen(WHITE);
+  ILI9341_SetRotation(SCREEN_HORIZONTAL_2);
+  ILI9341_DrawText("HELLO WORLD", FONT4, 90, 110, BLACK, WHITE);
+  HAL_Delay(1000);
+
+  //Writing numbers
+  ILI9341_FillScreen(WHITE);
+  static char BufferText[30];
+  for(uint8_t i = 0; i <= 5; i++)
+  {
+    sprintf(BufferText, "COUNT : %d", i);
+    ILI9341_DrawText(BufferText, FONT3, 10, 10, BLACK, WHITE);
+    ILI9341_DrawText(BufferText, FONT3, 10, 30, BLUE, WHITE);
+    ILI9341_DrawText(BufferText, FONT3, 10, 50, RED, WHITE);
+    ILI9341_DrawText(BufferText, FONT3, 10, 70, GREEN, WHITE);
+    ILI9341_DrawText(BufferText, FONT3, 10, 90, YELLOW, WHITE);
+    ILI9341_DrawText(BufferText, FONT3, 10, 110, PURPLE, WHITE);
+    ILI9341_DrawText(BufferText, FONT3, 10, 130, ORANGE, WHITE);
+    ILI9341_DrawText(BufferText, FONT3, 10, 150, MAROON, WHITE);
+    ILI9341_DrawText(BufferText, FONT3, 10, 170, WHITE, BLACK);
+    ILI9341_DrawText(BufferText, FONT3, 10, 190, BLUE, BLACK);
+  }
+
+  // Horizontal Line (X, Y, Length, Color)
+  ILI9341_FillScreen(WHITE);
+  ILI9341_DrawHLine(50, 120, 200, NAVY);
+  HAL_Delay(1000);
+
+  // Vertical Line (X, Y, Length, Color)
+  ILI9341_FillScreen(WHITE);
+  ILI9341_DrawVLine(160, 40, 150, DARKGREEN);
+  HAL_Delay(1000);
+
+  // Hollow Circle (Centre X, Centre Y, Radius, Color)
+  ILI9341_FillScreen(WHITE);
+  ILI9341_DrawHollowCircle(160, 120, 80, PINK);
+  HAL_Delay(1000);
+
+  // Filled Circle (Centre X, Centre Y, Radius, Color)
+  ILI9341_FillScreen(WHITE);
+  ILI9341_DrawFilledCircle(160, 120, 50, CYAN);
+  HAL_Delay(1000);
+
+  // Filled Rectangle (Start X, Start Y, Length X, Length Y)
+  ILI9341_FillScreen(WHITE);
+  ILI9341_DrawRectangle(50, 50, 220, 140, GREENYELLOW);
+  HAL_Delay(1000);
+
+  // Hollow Rectangle (Start X, Start Y, End X, End Y)
+  ILI9341_FillScreen(WHITE);
+  ILI9341_DrawHollowRectangleCoord(50, 50, 270, 190, DARKCYAN);
+  HAL_Delay(1000);
+
+  // Simple Pixel Only (X, Y, Color)
+  ILI9341_FillScreen(WHITE);
+  ILI9341_DrawPixel(100, 100, BLACK);
+  HAL_Delay(1000);
+  /* USER CODE END 2 */
