@@ -3,6 +3,15 @@ TFT codes to copy in STM32cubeide
 STM32_HAL_ILI9341
 ILI9341 Library for STM32 HAL
 
+my other youtube videos
+https://www.robotinrealworld.com/
+https://youtu.be/82F9eJipv_c
+https://youtu.be/I0UmecJpGbU
+https://youtu.be/9_I6zgww_4w
+https://youtu.be/jrVxhkG1k3U
+
+
+
 Tutorial https://blog.naver.com/eziya76/221579262995
 
 References
